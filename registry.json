@@ -617,6 +617,22 @@
         "Model Router",
         "Fallback"
       ]
+    },
+    {
+      "id": "codex-workspace-usage",
+      "name": "Codex Workspace Usage",
+      "description": "Shows daily Codex Workspace token, turn, credit, and user usage in a Management Center dashboard using existing Codex OAuth credentials.",
+      "author": "ZHOUSJ6",
+      "version": "0.2.0",
+      "repository": "https://github.com/ZHOUSJ6/cpa-plugin-codex-workspace-usage",
+      "homepage": "https://github.com/ZHOUSJ6/cpa-plugin-codex-workspace-usage",
+      "license": "MIT",
+      "tags": [
+        "Management",
+        "Usage",
+        "Codex",
+        "Dashboard"
+      ]
     }
   ]
 }
