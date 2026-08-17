@@ -5,7 +5,7 @@
 | 插件 | 版本 | 用途 |
 | --- | --- | --- |
 | [`codex-workspace-usage`](https://github.com/ZHOUSJ6/cpa-plugin-codex-workspace-usage) | `0.3.1` | 在 CPA 管理中心显示 Codex workspace 日用量，并提供鉴权用量 API。 |
-| [`codex-cyber-policy-cooldown`](https://github.com/ZHOUSJ6/codex-cyber-policy-cooldown) | `0.1.0` | 请求命中 `cyber_policy` 后，冷却整个 Codex 凭据。 |
+| [`codex-cyber-policy-cooldown`](https://github.com/ZHOUSJ6/codex-cyber-policy-cooldown) | `0.1.1` | 请求命中 `cyber_policy` 后，冷却整个 Codex 凭据。 |
 
 ## 在 CPA 中添加
 
