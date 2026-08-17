@@ -1,107 +1,30 @@
-# CLIProxyAPI Plugins Store
+# ZHOUSJ6 CLIProxyAPI Plugins Store
 
-This repository is the lightweight official plugin registry for CLIProxyAPI.
-It only maintains `registry.json`; plugin binaries, checksums, and release notes
-must stay in each plugin author's own GitHub repository.
+这是 ZHOUSJ6 自用的 CLIProxyAPI（CPA）插件商店。一个商店源统一提供以下插件：
 
-## Registry Format
+| 插件 | 版本 | 用途 |
+| --- | --- | --- |
+| [`codex-workspace-usage`](https://github.com/ZHOUSJ6/cpa-plugin-codex-workspace-usage) | `0.3.1` | 在 CPA 管理中心显示 Codex workspace 日用量，并提供鉴权用量 API。 |
+| [`codex-cyber-policy-cooldown`](https://github.com/ZHOUSJ6/codex-cyber-policy-cooldown) | `0.1.0` | 请求命中 `cyber_policy` 后，冷却整个 Codex 凭据。 |
 
-`registry.json` must use this shape:
+## 在 CPA 中添加
 
-```json
-{
-  "schema_version": 1,
-  "plugins": [
-    {
-      "id": "sample-provider",
-      "name": "Sample Provider",
-      "description": "Adds sample provider support.",
-      "author": "author-name",
-      "repository": "https://github.com/author-name/cliproxy-sample-provider",
-      "logo": "https://raw.githubusercontent.com/author-name/cliproxy-sample-provider/main/logo.png",
-      "homepage": "https://github.com/author-name/cliproxy-sample-provider",
-      "license": "MIT",
-      "tags": ["provider"]
-    }
-  ]
-}
+把这个仓库的在线 `registry.json` 添加为自定义商店源：
+
+```yaml
+plugins:
+  enabled: true
+  store-sources:
+    - https://raw.githubusercontent.com/ZHOUSJ6/CLIProxyAPI-Plugins-Store/main/registry.json
 ```
 
-Required fields:
+重启 CPA 或刷新插件商店后，按插件 ID 搜索并在线安装即可。各插件的具体配置请查看对应仓库。
 
-- `id`
-- `name`
-- `description`
-- `author`
-- `repository`
+## 商店维护方式
 
-Optional fields:
+- 此仓库只登记 ZHOUSJ6 自己维护的插件。
+- CPA 会自动加载官方商店，因此这里不会复制官方插件，避免相同插件 ID 出现在多个商店源后产生安装歧义。
+- 插件的安装包和版本更新由各插件仓库的 GitHub Release 提供；这里的 `version` 是版本发现失败时的回退值。
+- 新增、移除插件或修改展示信息时，更新 [`registry.json`](./registry.json)。
 
-- `version` (legacy; only used as a display fallback when the latest release
-  cannot be queried)
-- `logo`
-- `homepage`
-- `license`
-- `tags`
-
-## Validation Rules
-
-- `schema_version` must be `1`.
-- `id` must match CLIProxyAPI plugin ID rules: start with an ASCII letter or
-  digit, then use only ASCII letters, digits, `.`, `_`, or `-`, up to 128
-  characters total.
-- `id` values must be unique.
-- `version`, when present, must not start with `v`.
-- `repository` must be exactly `https://github.com/{owner}/{repo}`.
-
-## Release Requirements
-
-Plugin authors publish binaries in their own GitHub Releases. CLIProxyAPI
-reads the repository's latest release: the release tag defines the plugin
-version and must be `v<version>` with a dotted numeric version, for example
-`v0.1.0`. Publishing a new release is all it takes to ship an update; the
-registry does not need to change.
-
-Each release must include one `checksums.txt` and one zip per supported platform.
-Asset names must use the release tag version without the leading `v`:
-
-```text
-<id>_<version>_<goos>_<goarch>.zip
-checksums.txt
-```
-
-Examples:
-
-```text
-sample-provider_0.1.0_darwin_arm64.zip
-sample-provider_0.1.0_linux_amd64.zip
-sample-provider_0.1.0_windows_amd64.zip
-checksums.txt
-```
-
-`checksums.txt` must use sha256sum format:
-
-```text
-<sha256>  sample-provider_0.1.0_darwin_arm64.zip
-```
-
-## Zip Layout
-
-Each platform zip must contain the target dynamic library at the zip root:
-
-- Darwin: `<id>.dylib`
-- Linux: `<id>.so`
-- Windows: `<id>.dll`
-
-Nested dynamic libraries, absolute paths, zip-slip paths, mismatched filenames,
-and multiple dynamic libraries are rejected by the CLIProxyAPI installer.
-
-## Adding A Plugin
-
-Open a pull request that updates only `registry.json` unless documentation also
-needs clarification. The pull request should include:
-
-- The plugin's GitHub repository URL.
-- The latest release tag in `v<version>` form, for example `v0.1.0`.
-- Evidence that the required zip asset and `checksums.txt` exist in the release.
-- A short description of what capability the plugin adds.
+本仓库最初 fork 自 [`router-for-me/CLIProxyAPI-Plugins-Store`](https://github.com/router-for-me/CLIProxyAPI-Plugins-Store)，现在有意作为个人插件商店使用；官方商店内容仍由 CPA 自带的官方源提供。
