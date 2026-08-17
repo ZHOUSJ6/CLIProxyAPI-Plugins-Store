@@ -22,7 +22,7 @@
       "name": "Codex Cyber Policy Cooldown",
       "description": "Cools down an entire Codex credential when a failed request matches cyber_policy.",
       "author": "ZHOUSJ6",
-      "version": "0.1.0",
+      "version": "0.1.1",
       "repository": "https://github.com/ZHOUSJ6/codex-cyber-policy-cooldown",
       "homepage": "https://github.com/ZHOUSJ6/codex-cyber-policy-cooldown",
       "license": "MIT",
